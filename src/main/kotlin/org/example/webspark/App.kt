@@ -9,14 +9,32 @@ import spark.Route
 import spark.Spark.*
 
 fun main() {
+
+
+    val homeSystem = HomeSystem.getInstance()
+
+
+    homeSystem.addLight("Light 1")
+    homeSystem.addLight("Light 2")
+
+    val homeController = HomeController()
+    val thingController = ThingController()
+    for (light in homeSystem.lights) {
+        println(light.getDescription())
+    }
+
     initialize()
+
     get(
         "/",
-        Route { req: Request?, res: Response? ->
-            Template.render(
-                "home.html",
-                mapOf(),
-            )
+        Route { req: Request, res: Response ->
+            homeController.list(req, res)
+        })
+
+    get(
+        "/things/:id",
+        Route { req: Request, res: Response ->
+            thingController.lightDetail(req, res)
         })
 }
 
