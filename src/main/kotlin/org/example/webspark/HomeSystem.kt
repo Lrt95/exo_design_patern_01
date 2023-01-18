@@ -7,7 +7,7 @@ import org.example.webspark.models.Thing
 class HomeSystem private constructor() : OnLightOnListener{
 
     var things = mutableListOf<Thing>()
-    var messages = mutableListOf<String>()
+    private var messages = mutableListOf<String>()
 
     companion object {
 
